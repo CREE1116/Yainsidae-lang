@@ -1,14 +1,15 @@
 package yainlang;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import yainlang.Items;
+import yainlang.parser.Parser;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Locale;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 public class main extends Items {
 
     public static void main(String[] args) throws IOException {
@@ -30,17 +31,15 @@ public class main extends Items {
         int endPos = TotalText.lastIndexOf("말도안된다고엏엏");
         TotalText = TotalText.substring(startPos, endPos);
  
-//        Print print = new Print();
-//        Scan scan = new Scan();
-//        VarGet varGet = new VarGet();
-//        VarSet varSet = new VarSet();
+        Parser parser = new Parser();
 //
         String[] lines = TotalText.split("\\n");
         int i= 0;
         for (String line : lines) {
         	System.out.print(i+":		");
-        	System.out.println(line);
+        	System.out.print(line+"----------");
         	i++;
+            System.out.println(parser.parse(line));
         }
             
 //            if (print.check(line)) print.print(line);
