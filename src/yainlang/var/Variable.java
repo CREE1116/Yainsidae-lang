@@ -17,6 +17,9 @@ public class Variable<T> {
     public boolean check(String name) {
         return this.name.equals(name);
     }
+    public void set(T value) {
+        this.value = value;
+    }
     
     @Override
     public boolean equals(Object obj) {

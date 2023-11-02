@@ -1,5 +1,6 @@
 package yainlang;
 import yainlang.Items;
+import yainlang.machine.Machine;
 import yainlang.parser.Parser;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -11,10 +12,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 public class main extends Items {
-
+public static Machine machine;
     public static void main(String[] args) throws IOException {
         TotalText = "";
-
+        machine = new Machine();
 //        Path path = Paths.get("./" + "test.umm");
 //        Charset cs = StandardCharsets.UTF_8;
 //        List<String> list = Files.readAllLines(path, cs);
@@ -27,27 +28,20 @@ public class main extends Items {
         String readerString;
         while ((readerString = reader.readLine()) != null) first(readerString);
         reader.close();
-        int startPos = TotalText.indexOf("친애하는 시민 동지 여러분") + 14;
+        int startPos = TotalText.indexOf("친애하는 시민 동지 여러분") + 15;
         int endPos = TotalText.lastIndexOf("말도안된다고엏엏");
         TotalText = TotalText.substring(startPos, endPos);
  
-        Parser parser = new Parser();
+        Parser parser = new Parser(machine);
 //
         String[] lines = TotalText.split("\\n");
-        int i= 0;
+
+// 단순한 구문분석 출력
         for (String line : lines) {
-        	System.out.print(i+":		");
-        	System.out.print(line+"----------");
-        	i++;
-            System.out.println(parser.parse(line));
+        //    System.out.println(parser.parse(line));
+        parser.parse(line);
         }
-            
-//            if (print.check(line)) print.print(line);
-//            else if (scan.check(line)) scan.scanner(line);
-//            else if (varGet.check(line)) varGet.get(line);
-//            else if (varSet.check(line)) varSet.set(line);
-//        }
-        
+        machine.run();
     }
         
 

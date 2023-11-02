@@ -2,12 +2,13 @@ package yainlang.test;
 
 import java.util.regex.Pattern;
 
+import yainlang.machine.Machine;
 import yainlang.parser.Parser;
 
 public class patterTest {
 
     public void Test(){
-        Parser parser = new Parser();
+        Parser parser = new Parser(new Machine());
         System.out.println(parser.parse("여러분들의 (변수이름/출력할 문자열)을 확실하게 만나고 확인하시게 될 것입니다 여러분!"));
         System.out.println(parser.parse("늬우스를 상영하겠습니다"));
         System.out.println(parser.parse("반동이다!"));
